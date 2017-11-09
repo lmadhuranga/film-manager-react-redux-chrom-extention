@@ -1,36 +1,28 @@
 import React, {Component, PropTypes} from 'react';
-import uuid from 'uuid';
+import FilmForm from '../components/FilmForm';
 
 export default class FilmAdd extends Component {
-
-    static propTypes = {
-        addFilm: PropTypes.func.isRequired,
-        toggleView: PropTypes.func.isRequired
-    };
 
     constructor(props, context) {
         super(props, context);
         this.state = {
-            film: {name: ''}
+            film: {name: '', size:''}
         };
+        this.updateFilmState = this.updateFilmState.bind(this);
     }
 
     handlerClick() {
         this.props.toggleView(false);
     }
 
-    onTitleChange(event) {
-        const film = this.state.film;
-        console.log('mad_msg__film', film);
-        film.name = event.target.value;
-        this.setState({
-            film: film
-        });
+    updateFilmState(event) {
+        const field = event.target.name;
+        let film = this.state.film;
+        film[field] = event.target.value;
+        return this.setState({film: film});
     }
 
     onClickSave(event) {
-        const film = this.state.film;
-        film.id = uuid.v4();
         this.props.addFilm(film);
         // show film list
         this.props.toggleView(false);
@@ -42,18 +34,18 @@ export default class FilmAdd extends Component {
                 <h1>Movies</h1>
                 <h2>Add Movie</h2>
                 <label onClick={this.handlerClick.bind(this)}>List Movie</label>
-                <input
-                    type="text"
-                    onChange={this.onTitleChange.bind(this)}
-                    value={this.state.film.name}
+                <FilmForm film={this.state.film}
+                          onSave={this.onClickSave.bind(this)}
+                          onChange={this.updateFilmState}
+                          errors={this.state.errors}
                 />
 
-                <input
-                    type="submit"
-                    value="Save"
-                    onClick={this.onClickSave.bind(this)}
-                />
             </section>
         );
     }
 }
+
+FilmAdd.propTypes = {
+    addFilm: PropTypes.func.isRequired,
+    toggleView: PropTypes.func.isRequired
+};

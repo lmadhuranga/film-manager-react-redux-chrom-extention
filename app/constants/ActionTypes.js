@@ -1,4 +1,5 @@
 export const ADD_FILM = 'ADD_FILM';
+export const UPDATE_FILM = 'UPDATE_FILM';
 
 
 export const ADD_TODO = 'ADD_TODO';

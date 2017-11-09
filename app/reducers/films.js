@@ -10,6 +10,8 @@ export default function films(state = initialState, action) {
     switch (action.type) {
         case ActionTypes.ADD_FILM:
             return [...state, Object.assign({}, action.film)];
+        case ActionTypes.UPDATE_FILM:
+            return [...state, Object.assign({}, action.film)];
         default:
             return state;
 

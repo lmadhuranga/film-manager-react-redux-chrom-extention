@@ -1,4 +1,5 @@
 chrome.storage.local.get('todos', (obj) => {
+  console.log('mad_msg__obj',obj)
   let todos = obj.todos;
   if (todos) {
     todos = JSON.parse(todos);
