@@ -1,6 +1,6 @@
-import { combineReducers } from 'redux';
-import todos from './todos';
+import {combineReducers} from 'redux';
+import films from './films';
 
 export default combineReducers({
-  todos
+    films
 });
