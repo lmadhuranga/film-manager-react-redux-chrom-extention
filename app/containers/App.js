@@ -3,12 +3,14 @@ import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
 import MainSection from '../components/MainSection';
 import * as FilmActions from '../actions/films';
+import * as AuthorActions from '../actions/authors';
 import style from './App.css';
 import FilmAdd from "../components/FilmAdd";
 
 @connect(
     state => ({
-        films: state.films
+        films: state.films,
+        authors: state.authors
     }),
     dispatch => ({
         actions: bindActionCreators(FilmActions, dispatch)
@@ -24,8 +26,9 @@ export default class App extends Component {
     constructor(props, context) {
         super(props, context);
         this.state = {
-            isNew: true
+            isNew: false
         };
+        this.handlerToggleView = this.handlerToggleView.bind(this);
     }
 
     handlerToggleView(isNew) {
@@ -35,14 +38,20 @@ export default class App extends Component {
     }
 
     render() {
-        const {films, actions} = this.props;
+        const {films, actions, authors} = this.props;
         let isNew = this.state.isNew;
         let currentPage;
         if (isNew) {
-            currentPage = <FilmAdd toggleView={this.handlerToggleView.bind(this)} addFilm={actions.addFilm} />
+            currentPage = <FilmAdd
+                toggleView={this.handlerToggleView}
+                authors={authors}
+                actions={actions}/>
         }
         else {
-            currentPage = <MainSection toggleView={this.handlerToggleView.bind(this)} films={films} actions={actions}/>;
+            currentPage = <MainSection
+                toggleView={this.handlerToggleView}
+                films={films}
+                actions={actions}/>;
         }
         return (
             <div className={style.normal}>

@@ -22,13 +22,12 @@ export default class MainSection extends Component {
 
     render() {
         const {films, actions} = this.props;
+        console.log('mad_msg__ actions',actions);
         return (
             <section >
-                <h1>List Moview</h1>
+                <h1>List Movie</h1>
+                <button className="btn btn-small" onClick={this.handlerClick.bind(this)}>Add Movie</button>
                 <ul >
-                    <li>
-                        <label onClick={this.handlerClick.bind(this)}>Add Movie</label>
-                    </li>
                     {films.map(film =>
                         <FilmItem key={film.id} film={film} {...actions} />
                     )}

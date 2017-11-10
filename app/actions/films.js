@@ -1,7 +1,8 @@
 import * as types from '../constants/ActionTypes';
 import uuid from 'uuid';
 
-export function addFilm(film) {
+export function saveFilm(film) {
+    console.log('mad_msg__ savefilm reducer', film);
     if (film.id) {
         return {type: types.UPDATE_FILM, film};
     }

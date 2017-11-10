@@ -1,17 +1,15 @@
 import React, {PropTypes} from 'react';
 import TextInput from '../common/TextInput';
 const FilmForm = ({film, onSave, onChange, loading, errors}) => {
-    console.log('mad_msg__film',film)
     return (
         <form >
-            <h1>Add Movie</h1>
             <TextInput
                 name="name"
                 label="Name"
                 onChange={onChange}
                 placeholder="Name"
                 value={film.name}
-                error='error_name'
+                error='{errors.name}'
             />
 
             <TextInput
@@ -20,14 +18,35 @@ const FilmForm = ({film, onSave, onChange, loading, errors}) => {
                 onChange={onChange}
                 placeholder="Size"
                 value={film.size}
-                error='error_size'
+                error='{errors.size}'
             />
+
+            <TextInput
+                name="quality"
+                label="Quality"
+                onChange={onChange}
+                placeholder="quality"
+                value={film.quality}
+                error='{errors.qualitye}'
+            />
+
+            <TextInput
+                name="location"
+                label="Location"
+                onChange={onChange}
+                placeholder="location"
+                value={film.location}
+                error='{errors.location}'
+            />
+
             <input
                 type="submit"
                 disabled={loading}
                 value={loading ? 'Save...' : 'Save'}
                 className="btn btn-primary"
-                onClick={onSave}/>
+                onClick={onSave}
+            />
+
         </form>
     );
 };

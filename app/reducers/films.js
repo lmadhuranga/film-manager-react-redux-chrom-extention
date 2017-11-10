@@ -11,7 +11,11 @@ export default function films(state = initialState, action) {
         case ActionTypes.ADD_FILM:
             return [...state, Object.assign({}, action.film)];
         case ActionTypes.UPDATE_FILM:
-            return [...state, Object.assign({}, action.film)];
+            return [
+                ...state.filter(film => film.id !== action.film.id),
+                Object.assign({}, action.film)
+            ];
+
         default:
             return state;
 

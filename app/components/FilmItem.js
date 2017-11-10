@@ -17,13 +17,13 @@ export default class TodoItem extends Component {
     element = (
         <div>
           <label>
-              {film.name}
+              {film.name} - {film.size} - {film.quality} - {film.location}
           </label>
         </div>
     );
     return (
       <li>
-          {film.name}
+          {element}
       </li>
     );
   }

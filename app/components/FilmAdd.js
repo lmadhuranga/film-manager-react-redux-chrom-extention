@@ -6,12 +6,23 @@ export default class FilmAdd extends Component {
     constructor(props, context) {
         super(props, context);
         this.state = {
-            film: {name: '', size:''}
+            film: {name: '', size: '', quality: '', location: ''},
+            errors: {
+                name: 'sd',
+                size: 'dd',
+                quality:'qu',
+                locaiton:'qu'
+            }
         };
+        this.handlerGoToList = this.handlerGoToList.bind(this);
         this.updateFilmState = this.updateFilmState.bind(this);
+        this.handlerSaveFilm = this.handlerSaveFilm.bind(this);
+
+        console.log('mad_msg__this.props.actions', this.props.actions)
+        console.log('mad_msg__this.props.authors', this.props.authors)
     }
 
-    handlerClick() {
+    handlerGoToList() {
         this.props.toggleView(false);
     }
 
@@ -22,22 +33,22 @@ export default class FilmAdd extends Component {
         return this.setState({film: film});
     }
 
-    onClickSave(event) {
-        this.props.addFilm(film);
-        // show film list
-        this.props.toggleView(false);
+    handlerSaveFilm(event) {
+        event.preventDefault();
+        this.props.actions.saveFilm(this.state.film);
+        this.handlerGoToList();
     }
 
     render() {
         return (
             <section>
-                <h1>Movies</h1>
-                <h2>Add Movie</h2>
-                <label onClick={this.handlerClick.bind(this)}>List Movie</label>
-                <FilmForm film={this.state.film}
-                          onSave={this.onClickSave.bind(this)}
-                          onChange={this.updateFilmState}
-                          errors={this.state.errors}
+                <h1>Add Movie</h1>
+                <label onClick={this.handlerGoToList}>List Movie</label>
+                <FilmForm
+                    film={this.state.film}
+                    onSave={this.handlerSaveFilm}
+                    onChange={this.updateFilmState}
+                    errors={this.state.errors}
                 />
 
             </section>
@@ -46,6 +57,7 @@ export default class FilmAdd extends Component {
 }
 
 FilmAdd.propTypes = {
-    addFilm: PropTypes.func.isRequired,
-    toggleView: PropTypes.func.isRequired
+    toggleView: PropTypes.func.isRequired,
+    actions: PropTypes.object.isRequired,
+    authors: PropTypes.array.isRequired
 };
