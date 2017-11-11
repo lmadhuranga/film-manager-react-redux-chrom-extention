@@ -6,7 +6,7 @@ export default class FilmAdd extends Component {
     constructor(props, context) {
         super(props, context);
         this.state = {
-            film: {name: '', size: '', quality: '', location: '', uploader:''},
+            film: {name: '', size: '', quality: '', location: '', uploader: ''},
             errors: {
                 name: 'sd',
                 size: 'dd',
@@ -63,7 +63,9 @@ export default class FilmAdd extends Component {
                 location: 'http://192.168.2.24'
             },
         ];
-        fakeFilms.forEach((film)=>{this.props.actions.saveFilm(film)});
+        fakeFilms.forEach((film) => {
+            this.props.actions.saveFilm(film)
+        });
         // this.handlerGoToList();
     }
 
@@ -80,7 +82,6 @@ export default class FilmAdd extends Component {
                     onChange={this.updateFilmState}
                     errors={this.state.errors}
                 />
-
             </section>
         );
     }

@@ -1,7 +1,6 @@
 import React, {Component, PropTypes} from 'react';
 import FilmItem from './FilmItem';
 import {SHOW_ALL, SHOW_COMPLETED, SHOW_ACTIVE} from '../constants/TodoFilters';
-import style from './MainSection.css';
 
 export default class MainSection extends Component {
 
@@ -25,7 +24,10 @@ export default class MainSection extends Component {
         return (
             <section >
                 <h1>List Movie</h1>
-                <button className="btn btn-small" onClick={this.handlerClick.bind(this)}>Add Movie</button>
+                <button
+                    className="btn btn-small"
+                    onClick={this.handlerClick.bind(this)}>Add Movie
+                </button>
                 <ul >
                     {films.map(film =>
                         <FilmItem key={film.id} film={film} {...actions} />

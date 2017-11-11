@@ -8,7 +8,7 @@ export function loadUsersSuccess(users) {
 export function loadUsers() {
     return function (dispatch) {
         return userApi.getAllUsers().then(users =>{
-            dispatch(loadAuthorsSuccess(users))
+            dispatch(loadUsersSuccess(users))
         }).catch(error =>{
             throw(error);
         })

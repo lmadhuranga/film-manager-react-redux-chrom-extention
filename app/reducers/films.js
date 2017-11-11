@@ -8,13 +8,19 @@ const initialState = [{
 
 export default function films(state = initialState, action) {
     switch (action.type) {
+
         case ActionTypes.ADD_FILM:
             return [...state, Object.assign({}, action.film)];
+
+        case ActionTypes.LOAD_FILMS_SUCCESS:
+            return action.films.data;
+
         case ActionTypes.UPDATE_FILM:
             return [
                 ...state.filter(film => film.id !== action.film.id),
                 Object.assign({}, action.film)
             ];
+
         case ActionTypes.DELETE_FILM:
             return state.filter(
                 (film) => {
