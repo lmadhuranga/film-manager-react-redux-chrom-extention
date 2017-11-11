@@ -1,13 +1,13 @@
 import React, {PropTypes} from 'react';
-import TextInput from '../common/TextInput';
+import TextInput from '../common/formElement/TextInput';
 const FilmForm = ({film, onSave, onChange, loading, errors}) => {
     return (
         <form >
             <TextInput
                 name="name"
-                label="Name"
+                label="Film Name"
                 onChange={onChange}
-                placeholder="Name"
+                placeholder="Film Name"
                 value={film.name}
                 error='{errors.name}'
             />
@@ -37,6 +37,15 @@ const FilmForm = ({film, onSave, onChange, loading, errors}) => {
                 placeholder="location"
                 value={film.location}
                 error='{errors.location}'
+            />
+
+            <TextInput
+                name="uploader"
+                label="Uploader"
+                onChange={onChange}
+                placeholder="Uploader"
+                value={film.uploader}
+                error='{errors.uploader}'
             />
 
             <input

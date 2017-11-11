@@ -15,6 +15,12 @@ export default function films(state = initialState, action) {
                 ...state.filter(film => film.id !== action.film.id),
                 Object.assign({}, action.film)
             ];
+        case ActionTypes.DELETE_FILM:
+            return state.filter(
+                (film) => {
+                    if (film.id !== action.film.id) return film;
+                }
+            );
 
         default:
             return state;

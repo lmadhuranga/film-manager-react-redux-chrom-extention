@@ -2,7 +2,6 @@ import * as types from '../constants/ActionTypes';
 import uuid from 'uuid';
 
 export function saveFilm(film) {
-    console.log('mad_msg__ savefilm reducer', film);
     if (film.id) {
         return {type: types.UPDATE_FILM, film};
     }
@@ -10,4 +9,8 @@ export function saveFilm(film) {
         film.id = uuid.v4();
         return {type: types.ADD_FILM, film};
     }
+}
+
+export function deleteFilm(film) {
+    return {type: types.DELETE_FILM, film};
 }

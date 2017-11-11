@@ -22,7 +22,6 @@ export default class MainSection extends Component {
 
     render() {
         const {films, actions} = this.props;
-        console.log('mad_msg__ actions',actions);
         return (
             <section >
                 <h1>List Movie</h1>

@@ -6,20 +6,19 @@ export default class FilmAdd extends Component {
     constructor(props, context) {
         super(props, context);
         this.state = {
-            film: {name: '', size: '', quality: '', location: ''},
+            film: {name: '', size: '', quality: '', location: '', uploader:''},
             errors: {
                 name: 'sd',
                 size: 'dd',
-                quality:'qu',
-                locaiton:'qu'
+                quality: 'qu',
+                uploader: 'user1',
+                location: 'qu'
             }
         };
         this.handlerGoToList = this.handlerGoToList.bind(this);
         this.updateFilmState = this.updateFilmState.bind(this);
         this.handlerSaveFilm = this.handlerSaveFilm.bind(this);
-
-        console.log('mad_msg__this.props.actions', this.props.actions)
-        console.log('mad_msg__this.props.authors', this.props.authors)
+        this.handlerFake = this.handlerFake.bind(this);
     }
 
     handlerGoToList() {
@@ -39,11 +38,42 @@ export default class FilmAdd extends Component {
         this.handlerGoToList();
     }
 
+    handlerFake(event) {
+        event.preventDefault();
+        let fakeFilms = [
+            {
+                name: 'aa',
+                size: 'aa',
+                quality: 'qu',
+                uploader: 'user1',
+                location: 'http://192.168.2.2'
+            },
+            {
+                name: 'bb',
+                size: 'bb',
+                quality: 'qu',
+                uploader: 'user1',
+                location: 'http://192.168.2.23'
+            },
+            {
+                name: 'cc',
+                size: 'cc',
+                quality: 'qu',
+                uploader: 'user1',
+                location: 'http://192.168.2.24'
+            },
+        ];
+        fakeFilms.forEach((film)=>{this.props.actions.saveFilm(film)});
+        // this.handlerGoToList();
+    }
+
     render() {
         return (
             <section>
                 <h1>Add Movie</h1>
                 <label onClick={this.handlerGoToList}>List Movie</label>
+                <br/>
+                <label onClick={this.handlerFake}>Fake Movie</label>
                 <FilmForm
                     film={this.state.film}
                     onSave={this.handlerSaveFilm}

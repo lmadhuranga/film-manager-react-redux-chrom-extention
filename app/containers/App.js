@@ -10,7 +10,8 @@ import FilmAdd from "../components/FilmAdd";
 @connect(
     state => ({
         films: state.films,
-        authors: state.authors
+        authors: state.authors,
+        users:state.users
     }),
     dispatch => ({
         actions: bindActionCreators(FilmActions, dispatch)
