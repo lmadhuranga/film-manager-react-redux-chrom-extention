@@ -7,13 +7,7 @@ export default class FilmAdd extends Component {
         super(props, context);
         this.state = {
             film: {name: '', size: '', quality: '', location: '', uploader: ''},
-            errors: {
-                name: 'sd',
-                size: 'dd',
-                quality: 'qu',
-                uploader: 'user1',
-                location: 'qu'
-            }
+            errors: {}
         };
         this.handlerGoToList = this.handlerGoToList.bind(this);
         this.updateFilmState = this.updateFilmState.bind(this);
@@ -34,7 +28,7 @@ export default class FilmAdd extends Component {
 
     handlerSaveFilm(event) {
         event.preventDefault();
-        this.props.actions.saveFilm(this.state.film);
+        this.props.actions.addFilm(this.state.film);
         this.handlerGoToList();
     }
 
@@ -64,9 +58,9 @@ export default class FilmAdd extends Component {
             },
         ];
         fakeFilms.forEach((film) => {
-            this.props.actions.saveFilm(film)
+            this.props.actions.addFilm(film)
         });
-        // this.handlerGoToList();
+        this.handlerGoToList();
     }
 
     render() {

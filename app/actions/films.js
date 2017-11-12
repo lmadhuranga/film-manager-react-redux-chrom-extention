@@ -34,15 +34,15 @@ export function loadFilms() {
     }
 }
 
-export function saveFilmSuccess(film) {
-    return {type: types.SAVE_FILMS_SUCCESS, film};
+export function addFilmSuccess(film) {
+    return {type: types.ADD_FILM_SUCCESS, film};
 }
 
-export function saveFilm(film) {
-    return function (dispatch) {
+export function addFilm(film) {
+    return function (dispatch, getState) {
         axios.post('http://localhost:9000/films', film)
             .then(film => {
-                dispatch(saveFilmSuccess(film));
+                dispatch(addFilmSuccess(film));
             })
             .catch(error => {
                 throw(error);

@@ -10,7 +10,8 @@ export default class TodoItem extends Component {
 
     static propTypes = {
         film: PropTypes.object.isRequired,
-        deleteFilm: PropTypes.func.isRequired
+        deleteFilm: PropTypes.func.isRequired,
+        loadFilms: PropTypes.func.isRequired
     };
 
     constructor(props, context) {
@@ -19,8 +20,9 @@ export default class TodoItem extends Component {
     }
 
     handlerDelete(event) {
-        const {film} = this.props;
-        this.props.deleteFilm(film);
+        const {film, deleteFilm, loadFilms} = this.props;
+        deleteFilm(film);
+        loadFilms();
     }
 
     render() {
@@ -29,11 +31,11 @@ export default class TodoItem extends Component {
         element = (
             <div>
                 <label>
-                    <Name label={film.name} />-
-                    <Size label={film.size} />-
-                    <Quality label={film.quality} />-
-                    <UserLabel label={film.uploader} />-
-                    <Link url={film.location} label={film.location} />
+                    <Name label={film.name}/>-
+                    <Size label={film.size}/>-
+                    <Quality label={film.quality}/>-
+                    <UserLabel label={film.uploader}/>-
+                    <Link url={film.location} label={film.location}/>
                 </label>
                 &nbsp;<a className={style.closeBtn} onClick={this.handlerDelete} href="#">x</a>
             </div>
