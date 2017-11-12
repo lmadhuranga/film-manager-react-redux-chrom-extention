@@ -9,14 +9,14 @@ export default class FilmAdd extends Component {
             film: {name: '', size: '', quality: '', location: '', uploader: ''},
             errors: {}
         };
-        this.handlerGoToList = this.handlerGoToList.bind(this);
+        this.handlerToggleView = this.handlerToggleView.bind(this);
         this.updateFilmState = this.updateFilmState.bind(this);
         this.handlerSaveFilm = this.handlerSaveFilm.bind(this);
         this.handlerFake = this.handlerFake.bind(this);
     }
 
-    handlerGoToList() {
-        this.props.toggleView(false);
+    handlerToggleView() {
+        this.props.toggleView({name:'list'});
     }
 
     updateFilmState(event) {
@@ -29,7 +29,7 @@ export default class FilmAdd extends Component {
     handlerSaveFilm(event) {
         event.preventDefault();
         this.props.actions.addFilm(this.state.film);
-        this.handlerGoToList();
+        this.handlerToggleView();
     }
 
     handlerFake(event) {
@@ -60,14 +60,14 @@ export default class FilmAdd extends Component {
         fakeFilms.forEach((film) => {
             this.props.actions.addFilm(film)
         });
-        this.handlerGoToList();
+        this.handlerToggleView();
     }
 
     render() {
         return (
             <section>
                 <h1>Add Movie</h1>
-                <label onClick={this.handlerGoToList}>List Movie</label>
+                <label onClick={this.handlerToggleView}>List Movie</label>
                 <br/>
                 <label onClick={this.handlerFake}>Fake Movie</label>
                 <FilmForm
@@ -83,6 +83,5 @@ export default class FilmAdd extends Component {
 
 FilmAdd.propTypes = {
     toggleView: PropTypes.func.isRequired,
-    actions: PropTypes.object.isRequired,
-    authors: PropTypes.array.isRequired
+    actions: PropTypes.object.isRequired
 };

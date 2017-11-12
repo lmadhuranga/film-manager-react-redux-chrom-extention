@@ -1,6 +1,6 @@
 import React, {Component, PropTypes} from 'react';
 import FilmItem from './FilmItem';
-import {SHOW_ALL, SHOW_COMPLETED, SHOW_ACTIVE} from '../constants/TodoFilters';
+import {SHOW_ALL} from '../constants/TodoFilters';
 
 export default class MainSection extends Component {
 
@@ -13,10 +13,14 @@ export default class MainSection extends Component {
     constructor(props, context) {
         super(props, context);
         this.state = {filter: SHOW_ALL};
+        this.handlerToggleView = this.handlerToggleView.bind(this);
     }
 
-    handlerClick() {
-        this.props.toggleView(true);
+    handlerToggleView(page) {
+        if (page.name)
+            this.props.toggleView(page);
+        else
+            this.props.toggleView({name:'new'});
     }
 
     render() {
@@ -26,11 +30,15 @@ export default class MainSection extends Component {
                 <h1>List Movie</h1>
                 <button
                     className="btn btn-small"
-                    onClick={this.handlerClick.bind(this)}>Add Movie
+                    onClick={this.handlerToggleView}>Add Movie
                 </button>
                 <ul >
                     {films.map(film =>
-                        <FilmItem key={film.id} film={film} {...actions} />
+                        <FilmItem
+                            key={film.id}
+                            film={film} {...actions}
+                            toggleView={this.handlerToggleView}
+                        />
                     )}
                 </ul>
             </section>

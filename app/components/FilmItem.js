@@ -11,12 +11,14 @@ export default class TodoItem extends Component {
     static propTypes = {
         film: PropTypes.object.isRequired,
         deleteFilm: PropTypes.func.isRequired,
-        loadFilms: PropTypes.func.isRequired
+        loadFilms: PropTypes.func.isRequired,
+        toggleView: PropTypes.func.isRequired
     };
 
     constructor(props, context) {
         super(props, context);
         this.handlerDelete = this.handlerDelete.bind(this);
+        this.handlerToggleView = this.handlerToggleView.bind(this);
     }
 
     handlerDelete(event) {
@@ -25,13 +27,19 @@ export default class TodoItem extends Component {
         loadFilms();
     }
 
+    handlerToggleView() {
+        const {film} = this.props;
+        this.props.toggleView({name: 'update', id: film.id});
+    }
+
     render() {
         let element;
         const {film} = this.props;
         element = (
             <div>
                 <label>
-                    <Name label={film.name}/>-
+                    <Name onClick={this.handlerToggleView}
+                          label={film.name}/>-
                     <Size label={film.size}/>-
                     <Quality label={film.quality}/>-
                     <UserLabel label={film.uploader}/>-

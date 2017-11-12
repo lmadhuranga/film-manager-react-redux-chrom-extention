@@ -3,15 +3,13 @@ import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
 import MainSection from '../components/MainSection';
 import * as FilmActions from '../actions/films';
-import * as AuthorActions from '../actions/authors';
 import style from './App.css';
 import FilmAdd from "../components/FilmAdd";
+import FilmUpdate from "../components/FilmUpdate";
 
 @connect(
     state => ({
-        films: state.films,
-        authors: state.authors,
-        users:state.users
+        films: state.films
     }),
     dispatch => ({
         actions: bindActionCreators(FilmActions, dispatch)
@@ -27,33 +25,46 @@ export default class App extends Component {
     constructor(props, context) {
         super(props, context);
         this.state = {
-            isNew: false
+            page: {
+                name: 'list'  //Important list, new, update:id
+            }
         };
         this.handlerToggleView = this.handlerToggleView.bind(this);
     }
 
-    handlerToggleView(isNew) {
+    handlerToggleView(page) {
         this.setState({
-            isNew: isNew
+            page: page
         })
     }
 
     render() {
-        const {films, actions, authors} = this.props;
-        let isNew = this.state.isNew;
+        const {films, actions} = this.props;
+        const {page} = this.state;
         let currentPage;
-        if (isNew) {
-            currentPage = <FilmAdd
-                toggleView={this.handlerToggleView}
-                authors={authors}
-                actions={actions}/>
+        switch (page.name) {
+            case 'new':
+                currentPage = <FilmAdd
+                    toggleView={this.handlerToggleView}
+                    actions={actions}/>;
+                break;
+            case 'update':
+                let selectFilm = films.filter(film =>
+                    film.id === page.id
+                );
+                currentPage = <FilmUpdate
+                    toggleView={this.handlerToggleView}
+                    selectFilm={selectFilm[0]}
+                    actions={actions}/>;
+                break;
+            default:
+                currentPage = <MainSection
+                    toggleView={this.handlerToggleView}
+                    films={films}
+                    actions={actions}/>;
+                break;
         }
-        else {
-            currentPage = <MainSection
-                toggleView={this.handlerToggleView}
-                films={films}
-                actions={actions}/>;
-        }
+
         return (
             <div className={style.normal}>
                 {currentPage}

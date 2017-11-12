@@ -1,6 +1,5 @@
 import * as types from '../constants/ActionTypes';
-import authorApi from '../api/mockAuthorApi';
-import uuid from 'uuid';
+import authorApi from '../api/mockAuthorApi'
 
 export function loadAuthorsSuccess(authors) {
     return {type: types.LOAD_AUTHORS_SUCCESS, authors};
