@@ -1,0 +1,16 @@
+# firebase
+https://console.firebase.google.com/u/0/project/react-film-manager/overview
+
+<script src="https://www.gstatic.com/firebasejs/4.6.2/firebase.js"></script>
+<script>
+  // Initialize Firebase
+  var config = {
+    apiKey: "AIzaSyDldmxr837NqDkM0kAFljl5TpOmqQBo6fo",
+    authDomain: "react-film-manager.firebaseapp.com",
+    databaseURL: "https://react-film-manager.firebaseio.com",
+    projectId: "react-film-manager",
+    storageBucket: "",
+    messagingSenderId: "578918511570"
+  };
+  firebase.initializeApp(config);
+</script>

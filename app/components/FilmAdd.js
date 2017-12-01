@@ -28,12 +28,14 @@ export default class FilmAdd extends Component {
 
     handlerSaveFilm(event) {
         event.preventDefault();
-        this.props.actions.addFilm(this.state.film);
+        const {addFilm} = this.props.actions;
+        addFilm(this.state.film);
         this.handlerToggleView();
     }
 
     handlerFake(event) {
         event.preventDefault();
+        let {addFilm} = this.props.actions;
         let fakeFilms = [
             {
                 name: 'aa',
@@ -58,7 +60,7 @@ export default class FilmAdd extends Component {
             },
         ];
         fakeFilms.forEach((film) => {
-            this.props.actions.addFilm(film)
+            addFilm(film)
         });
         this.handlerToggleView();
     }

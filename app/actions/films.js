@@ -1,5 +1,8 @@
 import * as types from '../constants/ActionTypes';
 import axios from 'axios';
+import config from '../config/config';
+
+const configUrls = config.urls;
 
 export function deleteFilmSuccess(film) {
     return {type: types.DELETE_FILM_SUCCESS, film};
@@ -19,7 +22,7 @@ export function updateFilmSuccess(film) {
 
 export function deleteFilm(film) {
     return function (dispatch) {
-        axios.delete(`http://localhost:9000/films/${film.id}`)
+        axios.delete(`${configUrls.films}/${film.id}`)
             .then(response => {
                 dispatch(deleteFilmSuccess(film));
             })
@@ -31,7 +34,7 @@ export function deleteFilm(film) {
 
 export function loadFilms() {
     return function (dispatch) {
-        axios.get('http://localhost:9000/films')
+        axios.get(`${configUrls.films}`)
             .then(films => {
                 dispatch(loadFilmsSuccess(films));
             })
@@ -43,7 +46,7 @@ export function loadFilms() {
 
 export function addFilm(film) {
     return function (dispatch, getState) {
-        axios.post('http://localhost:9000/films', film)
+        axios.post(`${configUrls.films}`, film)
             .then(film => {
                 dispatch(addFilmSuccess(film));
             })
@@ -55,7 +58,7 @@ export function addFilm(film) {
 
 export function updateFilm(film) {
     return function (dispatch, getState) {
-        axios.put(`http://localhost:9000/films/${film.id}`, film)
+        axios.put(`${configUrls.films}/${film.id}`, film)
             .then(film => {
                 dispatch(updateFilmSuccess(film));
             })
