@@ -7,15 +7,7 @@ import style from './App.css';
 import FilmAdd from "../components/FilmAdd";
 import FilmUpdate from "../components/FilmUpdate";
 
-@connect(
-    state => ({
-        films: state.films
-    }),
-    dispatch => ({
-        actions: bindActionCreators(FilmActions, dispatch)
-    })
-)
-export default class App extends Component {
+export class App extends Component {
 
     static propTypes = {
         films: PropTypes.array.isRequired,
@@ -72,3 +64,16 @@ export default class App extends Component {
         );
     }
 }
+
+function mapStateToProps(state) {
+    return {
+      films: state.films
+    };
+}
+function mapDispatchToProps(dispatch) {
+    return {
+      actions: bindActionCreators(FilmActions, dispatch)
+    };
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(App)
