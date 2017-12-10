@@ -19,8 +19,10 @@ export default class FilmUpdate extends Component {
 
     componentWillMount() {
         const {selectFilm} = this.props;
-        this.setState({film: selectFilm});
-
+        if (selectFilm)
+            this.setState({film: selectFilm});
+        else
+            this.setState({film: {name: '', size: '', quality: '', location: '', uploader: ''}});
     }
 
     updateFilmState(event) {
@@ -32,15 +34,22 @@ export default class FilmUpdate extends Component {
 
     handlerSaveFilm(event) {
         event.preventDefault();
-        const {updateFilm} = this.props.actions;
-        updateFilm(this.state.film);
+        const {saveFilm} = this.props.actions;
+        saveFilm(this.state.film);
         this.handlerToggleView();
+    }
+
+    getHeader() {
+        if (this.props.selectFilm)
+            return 'Update Movie';
+        else
+            return 'New Movie';
     }
 
     render() {
         return (
             <section>
-                <h1>Update Movie</h1>
+                <h1>{this.getHeader()}</h1>
                 <label onClick={this.handlerToggleView}>List Movie</label>
                 <br/>
                 <FilmForm
@@ -57,5 +66,5 @@ export default class FilmUpdate extends Component {
 FilmUpdate.propTypes = {
     toggleView: PropTypes.func.isRequired,
     actions: PropTypes.object.isRequired,
-    selectFilm: PropTypes.object.isRequired
+    selectFilm: PropTypes.any.isRequired
 };

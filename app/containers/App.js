@@ -4,7 +4,7 @@ import {connect} from 'react-redux';
 import MainSection from '../components/MainSection';
 import * as FilmActions from '../actions/films';
 import style from './App.css';
-import FilmAdd from "../components/FilmAdd";
+// import FilmAdd from "../components/FilmAdd";
 import FilmUpdate from "../components/FilmUpdate";
 
 export class App extends Component {
@@ -36,7 +36,8 @@ export class App extends Component {
         let currentPage;
         switch (page.name) {
             case 'new':
-                currentPage = <FilmAdd
+                currentPage = <FilmUpdate
+                    selectFilm={false}
                     toggleView={this.handlerToggleView}
                     actions={actions}/>;
                 break;

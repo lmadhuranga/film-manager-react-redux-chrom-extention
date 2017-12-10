@@ -43,27 +43,25 @@ export function loadFilms() {
             });
     }
 }
-
-export function addFilm(film) {
-    return function (dispatch, getState) {
-        axios.post(`${configUrls.films}`, film)
-            .then(film => {
-                dispatch(addFilmSuccess(film));
-            })
-            .catch(error => {
-                throw(error);
-            });
-    }
-}
-
-export function updateFilm(film) {
-    return function (dispatch, getState) {
-        axios.put(`${configUrls.films}/${film.id}`, film)
-            .then(film => {
-                dispatch(updateFilmSuccess(film));
-            })
-            .catch(error => {
-                throw(error);
-            });
+export function saveFilm(film) {
+    return function (dispatch) {
+        if (film.id) {
+            axios.put(`${configUrls.films}/${film.id}`, film)
+                .then(film => {
+                    dispatch(updateFilmSuccess(film));
+                })
+                .catch(error => {
+                    throw(error);
+                });
+        }
+        else {
+            axios.post(`${configUrls.films}`, film)
+                .then(film => {
+                    dispatch(addFilmSuccess(film));
+                })
+                .catch(error => {
+                    throw(error);
+                });
+        }
     }
 }
