@@ -1,28 +1,3 @@
 {
-  "films": [
-    {
-      "name": "Hello",
-      "size": "aa",
-      "quality": "qu",
-      "uploader": "user1",
-      "location": "http://192.168.2.2",
-      "id": "etApNyx"
-    },
-    {
-      "name": "HH]",
-      "size": "bb",
-      "quality": "qu",
-      "uploader": "user13",
-      "location": "http://192.168.2.23",
-      "id": "QS6BU97"
-    },
-    {
-      "name": "AAA",
-      "size": "aa",
-      "quality": "qu",
-      "uploader": "user1",
-      "location": "http://192.168.2.2",
-      "id": "aVspr9Q"
-    }
-  ]
+  "films": []
 }
